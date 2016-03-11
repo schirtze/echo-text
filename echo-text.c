@@ -4,7 +4,7 @@
 #define BUFFER_SIZE 300
 
 void parse();
-void tokenize(char *str, int entryId);
+void tokenize(char *str);
 
 int main(int argc, char * argv[])
 {
@@ -15,19 +15,12 @@ int main(int argc, char * argv[])
 void parse()
 {
 	char buffer[BUFFER_SIZE];
-	int entryId = 1;
 	while ( fgets(buffer, BUFFER_SIZE, stdin) != NULL ) {
-		tokenize(buffer, entryId);
-
-		if ( entryId == 8) {
-			entryId = 2;
-		} else {
-			entryId++;
-		}
+		tokenize(buffer);
 	}
 }
 
-void tokenize(char *buffer, int entryId)
+void tokenize(char *buffer)
 {
 	int i;
 	for (i = 0; i < BUFFER_SIZE; i++) {
@@ -37,7 +30,7 @@ void tokenize(char *buffer, int entryId)
 		}
 	}
 
-	printf("%i:[%s]\n", entryId, buffer);
+	printf("[%s]\n", buffer);
 
 	char *token = strtok(buffer, " ");
 	while ( token != NULL ) {
